@@ -518,6 +518,52 @@ section { padding: clamp(var(--space-7), 8vw, var(--space-8)) 0; }
   image-orientation: from-image;
 }
 
+/* Photo strip (3-up editorial) -------------------------- */
+.photo-strip {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-3);
+  margin: var(--space-6) 0;
+}
+.photo-strip img {
+  width: 100%;
+  aspect-ratio: 3/4;
+  object-fit: cover;
+  object-position: top center;
+  border-radius: 2px;
+  border: 1px solid var(--hairline);
+  image-orientation: from-image;
+}
+@media (max-width: 600px) {
+  .photo-strip { grid-template-columns: 1fr 1fr; }
+  .photo-strip img { aspect-ratio: 1/1; }
+}
+
+/* Childhood / origin note ------------------------------- */
+.origin-figure {
+  display: flex;
+  align-items: flex-end;
+  gap: var(--space-5);
+  margin: var(--space-6) 0;
+  flex-wrap: wrap;
+}
+.origin-figure img {
+  width: 200px;
+  aspect-ratio: 3/4;
+  object-fit: cover;
+  object-position: top;
+  border-radius: 2px;
+  border: 1px solid var(--hairline);
+  flex-shrink: 0;
+}
+.origin-figure figcaption {
+  font-size: var(--fs-sm);
+  color: var(--muted);
+  max-width: 28ch;
+  line-height: 1.6;
+  font-style: italic;
+}
+
 /* Utility ----------------------------------------------- */
 .sr-only {
   position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
