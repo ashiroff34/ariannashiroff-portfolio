@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<base target="_top">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Arianna Shiroff</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT@0,9..144,400..700,0..100;1,9..144,400..700,0..100&family=Instrument+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --bg: #F2EAD8; --bg-deep: #ECE1C9; --surface: #E8DCC0;
+  --ink: #2A1F12; --ink-soft: #4A3826; --muted: #7C6953;
+  --accent: #8B3A26; --accent-dark: #5E2417;
+  --hairline: rgba(42, 31, 18, 0.18);
+  --hairline-soft: rgba(42, 31, 18, 0.10);
+  --font-display: "Fraunces", Georgia, "Times New Roman", serif;
+  --font-body: "Instrument Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --fs-xs: 0.8125rem; --fs-sm: 0.9375rem; --fs-base: 1.0625rem;
+  --fs-md: 1.3125rem; --fs-lg: 1.625rem; --fs-xl: 2.0625rem;
+  --fs-2xl: 2.5625rem; --fs-3xl: 3.25rem;
+  --space-1: 4px; --space-2: 8px; --space-3: 16px; --space-4: 24px;
+  --space-5: 32px; --space-6: 48px; --space-7: 64px; --space-8: 96px; --space-9: 128px;
+}
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body, h1, h2, h3, h4, p, ul, ol, figure, blockquote { margin: 0; padding: 0; }
+ul, ol { list-style: none; }
+img, svg { display: block; max-width: 100%; height: auto; }
+body {
+  background-color: var(--bg);
+  background-image:
+    radial-gradient(rgba(42, 31, 18, 0.035) 1px, transparent 1px),
+    radial-gradient(rgba(42, 31, 18, 0.025) 1px, transparent 1px);
+  background-size: 3px 3px, 5px 5px;
+  background-position: 0 0, 1px 2px;
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: var(--fs-base);
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+h1, h2, h3, h4 {
+  font-family: var(--font-display);
+  font-weight: 500;
+  line-height: 1.18;
+  letter-spacing: -0.012em;
+  color: var(--ink);
+  font-variation-settings: "opsz" 36, "SOFT" 50;
+}
+h1 { font-size: clamp(var(--fs-2xl), 6vw, var(--fs-3xl)); font-weight: 600; }
+h2 { font-size: clamp(var(--fs-xl), 4vw, var(--fs-2xl)); }
+h2 em { font-style: italic; color: var(--accent); font-variation-settings: "opsz" 96, "SOFT" 100; }
+h3 { font-size: var(--fs-lg); }
+h4 { font-size: var(--fs-md); font-weight: 600; }
+p { max-width: 65ch; }
+p + p { margin-top: 1em; }
+a { color: var(--ink); text-decoration: none; border-bottom: 1px solid transparent; transition: color 0.2s ease, border-color 0.2s ease; }
+a:hover { color: var(--accent); border-bottom-color: var(--accent); }
+::selection { background: var(--accent); color: var(--bg); }
+.container { width: 100%; max-width: 1100px; margin: 0 auto; padding: 0 clamp(var(--space-4), 5vw, var(--space-7)); }
+.prose { max-width: 65ch; }
+.site-header { padding: var(--space-5) 0; border-bottom: 1px solid var(--hairline); }
+.site-header .container { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: var(--space-3); }
+.site-mark { font-family: var(--font-display); font-size: var(--fs-md); font-weight: 600; font-style: italic; color: var(--ink); border: none; font-variation-settings: "opsz" 36, "SOFT" 80; cursor: pointer; }
+.site-mark:hover { color: var(--accent); }
+.site-nav ul { display: flex; gap: var(--space-5); font-size: var(--fs-xs); letter-spacing: 0.14em; text-transform: uppercase; }
+.site-nav a { color: var(--ink-soft); border-bottom: 1px solid transparent; padding-bottom: 2px; cursor: pointer; }
+.site-nav a:hover, .site-nav a.is-active { color: var(--accent); border-bottom-color: var(--accent); }
+.page { display: none; }
+.page.is-visible { display: block; }
+.hero { padding: clamp(var(--space-6), 7vw, var(--space-8)) 0 clamp(var(--space-5), 5vw, var(--space-7)); border-bottom: 1px solid var(--hairline); }
+.hero:has(.hero__photo-pane) { min-height: 88vh; display: grid; grid-template-columns: 1fr 1fr; align-items: stretch; padding: 0; }
+.hero__copy { display: flex; flex-direction: column; justify-content: center; padding: clamp(var(--space-6), 6vw, var(--space-8)); }
+.hero__photo-pane { position: relative; overflow: hidden; background: var(--surface); border-left: 1px solid var(--hairline); }
+.hero__photo-pane img { width: 100%; height: 100%; object-fit: cover; object-position: top center; filter: sepia(0.18) saturate(0.92) contrast(1.03); }
+.hero__eyebrow { font-size: var(--fs-xs); letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); margin-bottom: var(--space-5); }
+.hero__name { font-family: var(--font-display); font-size: clamp(3.75rem, 9vw, 8.5rem); font-weight: 600; line-height: 0.92; letter-spacing: -0.035em; margin-bottom: var(--space-6); font-variation-settings: "opsz" 144, "SOFT" 30; }
+.hero__title { font-size: clamp(var(--fs-2xl), 6.5vw, var(--fs-3xl)); font-weight: 500; font-variation-settings: "opsz" 96, "SOFT" 50; margin-bottom: var(--space-5); max-width: 18ch; }
+.hero__title em { font-style: italic; color: var(--accent); font-variation-settings: "opsz" 96, "SOFT" 100; }
+.hero__lede { font-size: var(--fs-base); color: var(--ink-soft); max-width: 44ch; line-height: 1.72; margin-bottom: var(--space-5); }
+.hero__cta { font-size: var(--fs-sm); color: var(--ink); border-bottom: 1px solid var(--ink); letter-spacing: 0.05em; display: inline-block; padding-bottom: 2px; align-self: flex-start; font-style: italic; font-family: var(--font-display); cursor: pointer; }
+.hero__cta:hover { color: var(--accent); border-color: var(--accent); }
+@media (max-width: 767px) {
+  .hero:has(.hero__photo-pane) { grid-template-columns: 1fr; grid-template-rows: 60vw 1fr; min-height: unset; }
+  .hero__photo-pane { order: -1; border-left: none; border-bottom: 1px solid var(--hairline); }
+  .hero__copy { padding: var(--space-6) var(--space-4) var(--space-7); }
+  .hero__name { font-size: clamp(3rem, 13vw, 5rem); }
+}
+section { padding: clamp(var(--space-7), 8vw, var(--space-8)) 0; }
+.section__label { font-size: var(--fs-xs); letter-spacing: 0.22em; text-transform: uppercase; color: var(--muted); margin-bottom: var(--space-4); }
+.section__title { margin-bottom: var(--space-6); max-width: 24ch; font-style: italic; }
+.credentials { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: var(--space-5); padding: var(--space-7) 0; border-top: 1px solid var(--hairline); border-bottom: 1px solid var(--hairline); }
+.credentials__item h4 { font-family: var(--font-display); font-size: var(--fs-md); font-weight: 600; font-style: italic; margin-bottom: var(--space-2); }
+.credentials__item p { font-size: var(--fs-sm); color: var(--muted); line-height: 1.55; }
+.featured { display: grid; grid-template-columns: 1fr; gap: var(--space-5); }
+@media (min-width: 768px) { .featured { grid-template-columns: repeat(3, 1fr); } }
+.featured__card { padding: var(--space-6) var(--space-5); background: var(--surface); border: 1px solid var(--hairline); position: relative; transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease; cursor: pointer; }
+.featured__card::before { content: ""; position: absolute; inset: 4px; border: 1px solid var(--hairline-soft); pointer-events: none; }
+.featured__card:hover { transform: translateY(-3px); border-color: var(--accent); box-shadow: 0 12px 32px -16px rgba(42, 31, 18, 0.25); }
+.featured__card a { border: none; color: inherit; display: block; }
+.featured__card h3 { font-size: var(--fs-md); margin-bottom: var(--space-3); font-style: italic; }
+.featured__card p { font-size: var(--fs-sm); color: var(--ink-soft); line-height: 1.6; }
+.featured__card .arrow { display: inline-block; margin-top: var(--space-4); color: var(--accent); font-size: var(--fs-sm); font-style: italic; font-family: var(--font-display); }
+.gallery-list { display: flex; flex-direction: column; }
+.artifact { display: grid; grid-template-columns: 1fr; gap: var(--space-4); padding: var(--space-7) 0; border-bottom: 1px solid var(--hairline); }
+.artifact:last-child { border-bottom: none; }
+@media (min-width: 768px) { .artifact { grid-template-columns: 80px 1fr 220px; gap: var(--space-6); align-items: start; } }
+.artifact__num { font-family: var(--font-display); font-size: var(--fs-xl); font-weight: 500; font-style: italic; color: var(--accent); line-height: 1; }
+.artifact__body h3 { font-size: var(--fs-lg); margin-bottom: var(--space-3); font-style: italic; }
+.artifact__meta { font-size: var(--fs-xs); letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted); margin-bottom: var(--space-3); }
+.artifact__blurb { font-size: var(--fs-base); line-height: 1.72; max-width: 60ch; color: var(--ink-soft); }
+.artifact__links { display: flex; flex-direction: column; gap: var(--space-2); font-size: var(--fs-sm); margin-top: var(--space-3); font-style: italic; font-family: var(--font-display); }
+.artifact__links a { color: var(--accent); cursor: pointer; }
+.artifact__links a:hover { color: var(--accent-dark); border-bottom-color: var(--accent-dark); }
+@media (min-width: 768px) { .artifact__links { margin-top: 0; align-items: flex-start; } }
+.bio p { font-size: var(--fs-md); line-height: 1.7; margin-bottom: 1.1em; color: var(--ink-soft); }
+.bio p:first-child::first-letter { font-family: var(--font-display); font-size: 4.4em; font-weight: 600; line-height: 0.85; float: left; padding: 0.08em 0.12em 0 0; margin-bottom: -0.05em; color: var(--accent); }
+.typology { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: var(--space-4); padding: var(--space-6); background: var(--surface); border: 1px solid var(--hairline); position: relative; margin: var(--space-7) 0; }
+.typology::before { content: ""; position: absolute; inset: 4px; border: 1px solid var(--hairline-soft); pointer-events: none; }
+.typology__item { font-size: var(--fs-sm); position: relative; }
+.typology__item strong { display: block; font-family: var(--font-display); font-size: var(--fs-md); font-weight: 600; font-style: italic; color: var(--accent); margin-bottom: 2px; }
+.typology__item span { color: var(--muted); font-size: var(--fs-xs); letter-spacing: 0.16em; text-transform: uppercase; }
+.contact-block { padding: var(--space-8) 0; }
+.contact-block h1 { margin-bottom: var(--space-5); max-width: 20ch; }
+.contact-email { font-family: var(--font-display); font-size: clamp(var(--fs-xl), 5vw, var(--fs-2xl)); font-weight: 500; font-style: italic; color: var(--accent); border-bottom: 1px solid var(--accent); padding-bottom: var(--space-1); word-break: break-all; }
+.contact-email:hover { color: var(--accent-dark); border-color: var(--accent-dark); }
+.site-footer { padding: var(--space-6) 0 var(--space-7); border-top: 1px solid var(--hairline); margin-top: var(--space-8); font-size: var(--fs-xs); color: var(--muted); letter-spacing: 0.06em; }
+.site-footer .container { display: flex; justify-content: space-between; flex-wrap: wrap; gap: var(--space-3); }
+.site-footer a { color: var(--muted); border-bottom-color: var(--hairline); }
+.bio-wrap { display: grid; grid-template-columns: 1fr; gap: var(--space-6); align-items: start; }
+@media (min-width: 768px) { .bio-wrap { grid-template-columns: 260px 1fr; } }
+.bio-photo { width: 100%; max-width: 260px; aspect-ratio: 3/4; object-fit: cover; object-position: top; border: 1px solid var(--hairline); filter: sepia(0.2) saturate(0.92) contrast(1.04); box-shadow: 0 6px 16px -10px rgba(42, 31, 18, 0.4); }
+.artifact__image { margin: var(--space-4) 0 0; border: 1px solid var(--hairline); max-width: 520px; background: var(--surface); padding: var(--space-2); }
+.artifact__image img { width: 100%; height: auto; display: block; filter: sepia(0.15) saturate(0.94) contrast(1.03); }
+.artifact__image figcaption { font-size: var(--fs-xs); color: var(--muted); padding: var(--space-3) var(--space-2) var(--space-1); letter-spacing: 0.06em; font-style: italic; font-family: var(--font-display); text-align: center; }
+.thyself-embed { margin-top: var(--space-4); overflow: hidden; border: 1px solid var(--hairline); max-width: 360px; height: 640px; background: var(--surface); position: relative; padding: var(--space-2); }
+.thyself-embed iframe { width: 100%; height: 100%; border: none; display: block; }
+.pangea-logo-wrap { display: flex; align-items: center; gap: var(--space-3); margin-bottom: var(--space-3); }
+.pangea-logo-wrap img { width: 56px; height: 56px; border-radius: 50%; object-fit: cover; filter: sepia(0.1); }
+.photo-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--space-3); margin-top: var(--space-4); max-width: 520px; }
+.photo-grid img { width: 100%; aspect-ratio: 4/3; object-fit: cover; border: 1px solid var(--hairline); filter: sepia(0.18) saturate(0.92) contrast(1.04); background: var(--surface); padding: 4px; }
+.photo-strip { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-4); margin: var(--space-7) 0; }
+.photo-strip img { width: 100%; aspect-ratio: 3/4; object-fit: cover; object-position: top center; border: 1px solid var(--hairline); filter: sepia(0.2) saturate(0.9) contrast(1.04); background: var(--surface); padding: 4px; }
+@media (max-width: 600px) { .photo-strip { grid-template-columns: 1fr 1fr; } .photo-strip img { aspect-ratio: 1/1; } }
+.editorial-strip { display: grid; grid-template-columns: repeat(3, 1fr); background: var(--bg-deep); border-top: 1px solid var(--hairline); border-bottom: 1px solid var(--hairline); padding: var(--space-5) clamp(var(--space-4), 5vw, var(--space-7)); gap: var(--space-4); }
+.editorial-strip img { width: 100%; aspect-ratio: 4/5; object-fit: cover; border: 1px solid var(--hairline); background: var(--surface); padding: 4px; filter: sepia(0.22) saturate(0.88) contrast(1.05); }
+@media (max-width: 700px) { .editorial-strip { grid-template-columns: 1fr; padding: var(--space-4); } .editorial-strip img { aspect-ratio: 4/3; } }
+.origin-figure { display: flex; align-items: flex-end; gap: var(--space-5); margin: var(--space-7) 0; flex-wrap: wrap; padding: var(--space-5); background: var(--surface); border: 1px solid var(--hairline); position: relative; }
+.origin-figure::before { content: ""; position: absolute; inset: 4px; border: 1px solid var(--hairline-soft); pointer-events: none; }
+.origin-figure img { width: 200px; aspect-ratio: 3/4; object-fit: cover; object-position: top; border: 1px solid var(--hairline); flex-shrink: 0; filter: sepia(0.32) saturate(0.85) contrast(1.06); background: var(--bg); padding: 4px; }
+.origin-figure figcaption { font-size: var(--fs-sm); color: var(--muted); max-width: 28ch; line-height: 1.65; font-style: italic; font-family: var(--font-display); }
+.gallery-grid { column-count: 3; column-gap: var(--space-4); margin: var(--space-7) 0; }
+.gallery-grid figure { break-inside: avoid; margin: 0 0 var(--space-4) 0; background: var(--surface); border: 1px solid var(--hairline); padding: 8px; position: relative; transition: transform 0.4s ease, box-shadow 0.4s ease; }
+.gallery-grid figure::before { content: ""; position: absolute; inset: 4px; border: 1px solid var(--hairline-soft); pointer-events: none; }
+.gallery-grid figure:hover { transform: translateY(-3px); box-shadow: 0 12px 28px -16px rgba(42, 31, 18, 0.35); }
+.gallery-grid img { width: 100%; height: auto; display: block; filter: sepia(0.18) saturate(0.92) contrast(1.04); }
+@media (max-width: 900px) { .gallery-grid { column-count: 2; } }
+@media (max-width: 600px) { .gallery-grid { column-count: 1; } }
+.gallery-coda { max-width: 60ch; margin: var(--space-8) auto var(--space-7); text-align: center; padding: var(--space-7) var(--space-4) 0; border-top: 1px solid var(--hairline); }
+.gallery-coda .section__label { margin-bottom: var(--space-4); }
+.gallery-coda p:not(.section__label) { font-size: var(--fs-md); font-style: italic; font-family: var(--font-display); color: var(--ink-soft); line-height: 1.7; margin: 0 auto; max-width: 50ch; }
+@media (max-width: 480px) { .site-header .container { flex-direction: column; align-items: flex-start; } .site-nav ul { gap: var(--space-4); flex-wrap: wrap; } }
+</style>
+</head>
+<body>
+
+<!-- IMG_BASE = base URL for all images. Replace with your own host if needed. -->
+<header class="site-header">
+  <div class="container">
+    <a class="site-mark" data-page="home">Arianna Shiroff</a>
+    <nav class="site-nav" aria-label="Primary">
+      <ul>
+        <li><a data-page="home">Home</a></li>
+        <li><a data-page="about">About</a></li>
+        <li><a data-page="work">Work</a></li>
+        <li><a data-page="gallery">Gallery</a></li>
+        <li><a data-page="contact">Contact</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+<!-- ============== HOME ============== -->
+<div class="page" id="page-home">
+  <section class="hero">
+    <div class="hero__copy">
+      <p class="hero__eyebrow">Penn State Schreyer · BS/MBA</p>
+      <h1 class="hero__name">Arianna<br>Shiroff</h1>
+      <p class="hero__lede">Penn State Schreyer freshman in the BS/MBA program. I've worked at Pfizer in clinical trials, done 150+ clinical hours at Saint Luke's, edited E. coli with CRISPR in a Penn State genetics lab, built an app, and co-founded a nonprofit at 15. All of it is some version of the same thing: taking something complicated and making it actually useful.</p>
+      <a class="hero__cta" data-page="work">See the work →</a>
+    </div>
+    <div class="hero__photo-pane">
+      <img src="https://ariannashiroff-portfolio.vercel.app/assets/headshot.jpg" alt="Arianna Shiroff">
+    </div>
+  </section>
+
+  <section>
+    <div class="container">
+      <div class="credentials">
+        <div class="credentials__item">
+          <h4>Pfizer</h4>
+          <p>Clinical trials internship: patient selection, AI governance, regulatory exposure.</p>
+        </div>
+        <div class="credentials__item">
+          <h4>Saint Luke's</h4>
+          <p>150+ clinical hours across ICU, OR, and infusion.</p>
+        </div>
+        <div class="credentials__item">
+          <h4>Pangea Kids</h4>
+          <p>Co-founded a nonprofit at 15. Fifteen chapters. $10K raised. Two thousand items to clinics in Saigon.</p>
+        </div>
+        <div class="credentials__item">
+          <h4>Penn State</h4>
+          <p>Schreyer Honors College, BS/MBA. CRISPR-Cas9 research on E. coli.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="editorial-strip">
+    <img src="https://ariannashiroff-portfolio.vercel.app/assets/ari-snowstorm.jpg" alt="Arianna Shiroff in a snowstorm">
+    <img src="https://ariannashiroff-portfolio.vercel.app/assets/ari-waterfront-golden.jpg" alt="Arianna Shiroff at the waterfront, golden hour">
+    <img src="https://ariannashiroff-portfolio.vercel.app/assets/ari-graduation.jpg" alt="Arianna Shiroff graduating high school, 2025">
+  </div>
+
+  <section>
+    <div class="container">
+      <p class="section__label">Selected Work</p>
+      <h2 class="section__title">Three things I'd want you to look at first.</h2>
+      <div class="featured">
+        <article class="featured__card" data-page="work">
+          <h3>Thyself</h3>
+          <p>An app for personality typology. Most people don't have a good way to actually understand themselves at this level of detail. Thyself is my attempt at one.</p>
+          <span class="arrow">Read more →</span>
+        </article>
+        <article class="featured__card" data-page="work">
+          <h3>Pangea Kids</h3>
+          <p>A nonprofit I co-founded at 15. The lesson: the hard part of medicine in low-resource settings is never the medicine.</p>
+          <span class="arrow">Read more →</span>
+        </article>
+        <article class="featured__card" data-page="work">
+          <h3>Pfizer Policy Brief</h3>
+          <p>A policy brief written to Pfizer's CMO and CSO on AI in clinical trial patient selection. Capability has outrun accountability by five years.</p>
+          <span class="arrow">Read more →</span>
+        </article>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ============== ABOUT ============== -->
+<div class="page" id="page-about">
+  <section class="hero">
+    <div class="container">
+      <p class="hero__eyebrow">About</p>
+      <h1 class="hero__title">The project is <em>translation.</em></h1>
+    </div>
+  </section>
+  <section>
+    <div class="container">
+      <div class="bio-wrap">
+        <img src="https://ariannashiroff-portfolio.vercel.app/assets/headshot.jpg" alt="Arianna Shiroff" class="bio-photo">
+        <div class="bio prose">
+          <p>I was born in Munich and moved back to the States as a kid. The version of me that came out of that is somebody who notices when language shifts between rooms. When the same thing gets said one way to one audience and another way to a different one. When something is true in a clinic but not in a journal article. When someone uses a word that doesn't quite fit. A lot of what I do is sitting in those small mismatches and figuring out what's underneath them.</p>
+          <p>At 15 I co-founded Pangea Kids, a nonprofit getting medical supplies to clinics in Saigon. By the time I was Vice President, we had fifteen chapters across schools, $10K raised, and around two thousand items donated. What I actually learned was that the hard part of low-resource medicine isn't medical. It's all the stuff between the donor and the nurse: figuring out which clinic actually needs which supply, when, and how to get it there in usable condition. That's where most things break, and it's the part nobody puts in the brochure.</p>
+          <p>What I keep finding is that the technical part is usually the easier part. What breaks is the layer where a real person, in a real moment, has to actually use the thing. That layer almost never gets written down. So I write it down. That's most of what I've been working on, in one form or another, for years.</p>
+          <p>The other things about me: I'm a freshman at Penn State in the Schreyer Honors BS/MBA program. Five years, two degrees, science and business at the same time. Right now I'm preparing for a clinical trials internship at Pfizer this summer, building Thyself toward a public release, and trying to read at least one good thing every day. I lift, walk at sunset, write more than I sleep, and spend most of my best hours with people I love. If you're working on something where the technical part isn't the hard part, I'd love to talk.</p>
+        </div>
+      </div>
+      <div class="photo-strip" aria-label="2024">
+        <img src="https://ariannashiroff-portfolio.vercel.app/assets/ari-waterfront-dusk.jpg" alt="Arianna Shiroff at the waterfront at dusk">
+        <img src="https://ariannashiroff-portfolio.vercel.app/assets/ari-boston-harbor.jpg" alt="Arianna Shiroff at Boston Harbor, 2024">
+        <img src="https://ariannashiroff-portfolio.vercel.app/assets/ari-boston-faneuil.jpg" alt="Arianna Shiroff in Boston">
+      </div>
+      <div class="typology">
+        <div class="typology__item"><span>MBTI</span><strong>ENTJ</strong></div>
+        <div class="typology__item"><span>Socionics</span><strong>LIE</strong></div>
+        <div class="typology__item"><span>Enneagram</span><strong>7w8 · 738</strong></div>
+        <div class="typology__item"><span>Instinct</span><strong>SP/SO</strong></div>
+        <div class="typology__item"><span>Attitudinal</span><strong>VLFE</strong></div>
+      </div>
+      <figure class="origin-figure">
+        <img src="https://ariannashiroff-portfolio.vercel.app/assets/ari-childhood.png" alt="Young Arianna in traditional Bavarian dress, Munich">
+        <figcaption>Munich, 2007. Born there, moved back.</figcaption>
+      </figure>
+    </div>
+  </section>
+</div>
+
+<!-- ============== WORK ============== -->
+<div class="page" id="page-work">
+  <section class="hero">
+    <div class="container">
+      <p class="hero__eyebrow">Work</p>
+      <h1 class="hero__title">Nine artifacts. <em>One throughline.</em></h1>
+      <p class="hero__lede">Each of these is a different surface for the same project: taking something complicated and making it actually useful. Clinical research. Product. Policy. Nonprofit work. The form keeps changing.</p>
+    </div>
+  </section>
+  <section>
+    <div class="container">
+      <div class="gallery-list">
+        <article class="artifact">
+          <div class="artifact__num">01</div>
+          <div class="artifact__body">
+            <p class="artifact__meta">Document · PDF</p>
+            <h3>Resume</h3>
+            <p class="artifact__blurb">A one-page summary of clinical research, product, nonprofit, and coursework. About ninety seconds to read.</p>
+          </div>
+          <div class="artifact__links">
+            <a href="https://ariannashiroff-portfolio.vercel.app/assets/resume.pdf" target="_blank" rel="noopener">Download PDF →</a>
+          </div>
+        </article>
+        <article class="artifact">
+          <div class="artifact__num">02</div>
+          <div class="artifact__body">
+            <p class="artifact__meta">Product · Beta · 100-Person Waitlist</p>
+            <h3>Thyself</h3>
+            <p class="artifact__blurb">A typology app I'm building. Enneagram-centered, with MBTI, Socionics, instinctual variants, and Attitudinals all built in. The point is to actually let people use these frameworks at the level of precision they were designed for, instead of the watered-down version most apps give you. Currently in beta with around 100 people on the waitlist.</p>
+          </div>
+          <div class="artifact__links">
+            <a href="https://psyche-app-two.vercel.app" target="_blank" rel="noopener">Open Thyself →</a>
+          </div>
+        </article>
+        <article class="artifact">
+          <div class="artifact__num">03</div>
+          <div class="artifact__body">
+            <p class="artifact__meta">Nonprofit · Co-Founder · Vice President</p>
+            <div class="pangea-logo-wrap">
+              <img src="https://ariannashiroff-portfolio.vercel.app/assets/pangea-logo.png" alt="Pangea Kids logo">
+              <h3>Pangea Kids</h3>
+            </div>
+            <p class="artifact__blurb">A nonprofit getting medical supplies to clinics in Saigon. I co-founded it at 15 and was Vice President. Fifteen chapters across schools. $10K raised. Around two thousand items donated. Most of the actual work was logistics: figuring out which clinic needed what, when, and how to get it there in usable condition. That part of low-resource medicine is way harder than the clinical part.</p>
+            <div class="photo-grid">
+              <img src="https://ariannashiroff-portfolio.vercel.app/assets/pangea-kids-1.png" alt="Pangea Kids children in Vietnam">
+              <img src="https://ariannashiroff-portfolio.vercel.app/assets/pangea-kids-2.png" alt="Pangea Kids child smiling">
+            </div>
+          </div>
+          <div class="artifact__links">
+            <a href="https://pangeakids.org" target="_blank" rel="noopener">pangeakids.org →</a>
+          </div>
+        </article>
+        <article class="artifact">
+          <div class="artifact__num">04</div>
+          <div class="artifact__body">
+            <p class="artifact__meta">Policy Brief · ENGL 138T · Penn State</p>
+            <h3>Good Intentions Are Not Governance</h3>
+            <p class="artifact__blurb">A policy brief written for ENGL 138T and addressed to Pfizer's CMO and CSO. Full title: "Good Intentions Are Not Governance: The Case Against Pfizer's Current AI Framework for Clinical Trial Patient Selection." The argument is that Pfizer's AI capability for selecting patients in clinical trials has outpaced its accountability structure by roughly five years. The brief lays out four binding recommendations for closing that gap.</p>
+            <div class="photo-grid">
+              <img src="https://ariannashiroff-portfolio.vercel.app/assets/pfizer-cohort.jpg" alt="Pfizer intern cohort">
+              <img src="https://ariannashiroff-portfolio.vercel.app/assets/pfizer-exterior.jpg" alt="At Pfizer headquarters">
+            </div>
+            <figure class="artifact__image">
+              <img src="https://ariannashiroff-portfolio.vercel.app/assets/pfizer-figure.png" alt="Governance timeline figure">
+              <figcaption>Figure 3. Pfizer AI governance capability vs. accountability gap, 2019 to 2024</figcaption>
+            </figure>
+          </div>
+          <div class="artifact__links">
+            <a href="https://ariannashiroff-portfolio.vercel.app/assets/pfizer-brief.pdf" target="_blank" rel="noopener">Read brief →</a>
+          </div>
+        </article>
+        <article class="artifact">
+          <div class="artifact__num">05</div>
+          <div class="artifact__body">
+            <p class="artifact__meta">Leadership · Penn State oSTEM</p>
+            <h3>oSTEM Corporate Liaison</h3>
+            <p class="artifact__blurb">Corporate Liaison for Penn State's oSTEM chapter. The role is connecting queer students in STEM with companies that want to hire from a pipeline they don't always know how to find. Boeing and CDM Smith are current corporate partners. I took Penn State to the 2025 National oSTEM Conference. Day-to-day is sponsorships, recruiting events, and panel coordination.</p>
+            <div class="photo-grid">
+              <img src="https://ariannashiroff-portfolio.vercel.app/assets/ari-ostem-group.jpg" alt="Arianna with oSTEM members at the 2025 National Conference">
+              <img src="https://ariannashiroff-portfolio.vercel.app/assets/ari-ostem-baltimore.jpg" alt="Penn State oSTEM at the Baltimore Inner Harbor">
+            </div>
+          </div>
+        </article>
+        <article class="artifact">
+          <div class="artifact__num">06</div>
+          <div class="artifact__body">
+            <p class="artifact__meta">Academic · Honors College · Penn State</p>
+            <h3>Schreyer Honors College</h3>
+            <p class="artifact__blurb">Penn State's Schreyer Honors College is the university's honors track. Smaller cohort, more demanding coursework, thesis requirement, and direct access to faculty. I'm a freshman in the program.</p>
+            <figure class="artifact__image" style="max-width: 360px;">
+              <img src="https://ariannashiroff-portfolio.vercel.app/assets/ari-graduation.jpg" alt="Arianna graduating high school, 2025">
+            </figure>
+          </div>
+          <div class="artifact__links">
+            <a href="https://www.shc.psu.edu" target="_blank" rel="noopener">Schreyer Honors College →</a>
+          </div>
+        </article>
+        <article class="artifact">
+          <div class="artifact__num">07</div>
+          <div class="artifact__body">
+            <p class="artifact__meta">Academic · BS/MBA · NYC Trip</p>
+            <h3>BS/MBA</h3>
+            <p class="artifact__blurb">An integrated five-year program at Penn State that pairs a science undergrad with a business graduate degree. As part of the cohort, I went on the BS/MBA New York City trip this fall: Pfizer, Salesforce, and Veeva, plus a networking dinner that turned into one of the best evenings I've had this year. A lot of interesting people in the room.</p>
+            <figure class="artifact__image" style="max-width: 460px;">
+              <img src="https://ariannashiroff-portfolio.vercel.app/assets/ari-nyc.jpg" alt="Arianna with the BS/MBA cohort in NYC">
+              <figcaption>BS/MBA cohort, New York City</figcaption>
+            </figure>
+          </div>
+        </article>
+        <article class="artifact">
+          <div class="artifact__num">08</div>
+          <div class="artifact__body">
+            <p class="artifact__meta">Photography · Side Project</p>
+            <h3>Gallery</h3>
+            <p class="artifact__blurb">A small collection of photographs from travel and around campus. Photography helps me slow down. It's not anything serious; it's just a fun side project.</p>
+            <div class="photo-grid">
+              <img src="https://ariannashiroff-portfolio.vercel.app/assets/gallery-greenhouse-back.jpg" alt="Greenhouse">
+              <img src="https://ariannashiroff-portfolio.vercel.app/assets/gallery-rome-grifo.jpg" alt="Rome street">
+            </div>
+          </div>
+          <div class="artifact__links">
+            <a data-page="gallery">Open the gallery →</a>
+          </div>
+        </article>
+        <article class="artifact">
+          <div class="artifact__num">09</div>
+          <div class="artifact__body">
+            <p class="artifact__meta">Essay · Writing</p>
+            <h3>The Intuition Beneath Networking</h3>
+            <p class="artifact__blurb">An essay arguing that the most important relationships in your life probably weren't planned. They happened because you stayed open to something and followed it. The transactional networking framework, where you give to get and work the room, misses the actual mechanism of how meaningful connections form.</p>
+            <figure class="artifact__image" style="max-width: 360px;">
+              <img src="https://ariannashiroff-portfolio.vercel.app/assets/ari-boston-street.jpg" alt="Arianna in Boston, 2024">
+            </figure>
+          </div>
+          <div class="artifact__links">
+            <a href="https://ariannashiroff-portfolio.vercel.app/assets/networking-essay.pdf" target="_blank" rel="noopener">Read essay →</a>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ============== GALLERY ============== -->
+<div class="page" id="page-gallery">
+  <section class="hero">
+    <div class="container">
+      <p class="hero__eyebrow">Gallery</p>
+      <h1 class="hero__title"><em>Stillness</em> in an otherwise moving world.</h1>
+    </div>
+  </section>
+  <section>
+    <div class="container">
+      <div class="gallery-grid">
+        <figure><img src="https://ariannashiroff-portfolio.vercel.app/assets/gallery-greenhouse-back.jpg" alt="Greenhouse, denim jacket from behind" loading="lazy"></figure>
+        <figure><img src="https://ariannashiroff-portfolio.vercel.app/assets/gallery-rome-grifo.jpg" alt="Rome street, Hotel Grifo" loading="lazy"></figure>
+        <figure><img src="https://ariannashiroff-portfolio.vercel.app/assets/gallery-tuscany.jpg" alt="Tuscan countryside" loading="lazy"></figure>
+        <figure><img src="https://ariannashiroff-portfolio.vercel.app/assets/gallery-cherry-blossoms.jpg" alt="Penn State cherry blossoms" loading="lazy"></figure>
+        <figure><img src="https://ariannashiroff-portfolio.vercel.app/assets/gallery-greenhouse-baskets.jpg" alt="Greenhouse, hanging baskets" loading="lazy"></figure>
+        <figure><img src="https://ariannashiroff-portfolio.vercel.app/assets/gallery-pisa.jpg" alt="Duomo di Pisa interior" loading="lazy"></figure>
+        <figure><img src="https://ariannashiroff-portfolio.vercel.app/assets/gallery-chandelier.jpg" alt="Baroque chandelier" loading="lazy"></figure>
+        <figure><img src="https://ariannashiroff-portfolio.vercel.app/assets/gallery-rome-courtyard.jpg" alt="Roman courtyard fountain" loading="lazy"></figure>
+        <figure><img src="https://ariannashiroff-portfolio.vercel.app/assets/gallery-greenhouse-front.jpg" alt="Greenhouse, second" loading="lazy"></figure>
+        <figure><img src="https://ariannashiroff-portfolio.vercel.app/assets/gallery-pigeon.jpg" alt="European alley with a pigeon" loading="lazy"></figure>
+        <figure><img src="https://ariannashiroff-portfolio.vercel.app/assets/gallery-fountain.jpg" alt="Italian courtyard fountain" loading="lazy"></figure>
+        <figure><img src="https://ariannashiroff-portfolio.vercel.app/assets/gallery-plant-shop.jpg" alt="Plant shop with red walls" loading="lazy"></figure>
+        <figure><img src="https://ariannashiroff-portfolio.vercel.app/assets/gallery-pansies.jpg" alt="A field of pansies" loading="lazy"></figure>
+        <figure><img src="https://ariannashiroff-portfolio.vercel.app/assets/gallery-bridge-sit.jpg" alt="Sitting on a footbridge in summer" loading="lazy"></figure>
+        <figure><img src="https://ariannashiroff-portfolio.vercel.app/assets/gallery-bicycles.jpg" alt="Underground bicycle parking" loading="lazy"></figure>
+        <figure><img src="https://ariannashiroff-portfolio.vercel.app/assets/gallery-aquarium.jpg" alt="Aquarium fish, close" loading="lazy"></figure>
+      </div>
+      <aside class="gallery-coda">
+        <p class="section__label">A note</p>
+        <p>I love photography because it captures some level of stillness in an otherwise moving world. It helps me slow down. I don't take it too seriously. It's just a fun side project.</p>
+      </aside>
+    </div>
+  </section>
+</div>
+
+<!-- ============== CONTACT ============== -->
+<div class="page" id="page-contact">
+  <section>
+    <div class="container">
+      <div class="contact-block">
+        <p class="hero__eyebrow">Contact</p>
+        <h1>Email is the best way to reach me.</h1>
+        <a href="mailto:ariannashiroff34@gmail.com" class="contact-email">ariannashiroff34@gmail.com</a>
+      </div>
+    </div>
+  </section>
+</div>
+
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <span>© 2026 Arianna Shiroff</span>
+    <span><a data-page="contact">ariannashiroff34@gmail.com</a></span>
+  </div>
+</footer>
+
+<script>
+(function () {
+  var pages = ['home', 'about', 'work', 'gallery', 'contact'];
+  function show(name) {
+    if (pages.indexOf(name) < 0) name = 'home';
+    document.querySelectorAll('.page').forEach(function (p) { p.classList.remove('is-visible'); });
+    var el = document.getElementById('page-' + name);
+    if (el) el.classList.add('is-visible');
+    document.querySelectorAll('.site-nav a, .site-mark').forEach(function (a) {
+      a.classList.toggle('is-active', a.getAttribute('data-page') === name);
+    });
+    window.scrollTo({ top: 0, behavior: 'instant' });
+  }
+  document.querySelectorAll('[data-page]').forEach(function (a) {
+    a.addEventListener('click', function (e) {
+      var page = a.getAttribute('data-page');
+      if (page) {
+        e.preventDefault();
+        show(page);
+      }
+    });
+  });
+  show('home');
+})();
+</script>
+</body>
+</html>
