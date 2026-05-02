@@ -700,6 +700,76 @@ section { padding: clamp(var(--space-7), 8vw, var(--space-8)) 0; }
   font-variation-settings: "opsz" 36, "SOFT" 80;
 }
 
+/* Gallery — masonry of paper-matted prints */
+.gallery-grid {
+  column-count: 3;
+  column-gap: var(--space-4);
+  margin: var(--space-7) 0;
+}
+.gallery-grid figure {
+  break-inside: avoid;
+  margin: 0 0 var(--space-4) 0;
+  background: var(--surface);
+  border: 1px solid var(--hairline);
+  padding: 8px;
+  position: relative;
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+.gallery-grid figure::before {
+  content: "";
+  position: absolute;
+  inset: 4px;
+  border: 1px solid var(--hairline-soft);
+  pointer-events: none;
+}
+.gallery-grid figure:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 28px -16px rgba(42, 31, 18, 0.35);
+}
+.gallery-grid img {
+  width: 100%;
+  height: auto;
+  display: block;
+  filter: sepia(0.18) saturate(0.92) contrast(1.04);
+}
+.gallery-grid figcaption {
+  font-size: var(--fs-xs);
+  color: var(--muted);
+  font-style: italic;
+  text-align: center;
+  padding: var(--space-2) 0 var(--space-1);
+  font-family: var(--font-display);
+  font-variation-settings: "opsz" 36, "SOFT" 80;
+}
+
+@media (max-width: 900px) {
+  .gallery-grid { column-count: 2; }
+}
+@media (max-width: 600px) {
+  .gallery-grid { column-count: 1; }
+}
+
+.gallery-coda {
+  max-width: 60ch;
+  margin: var(--space-8) auto var(--space-7);
+  text-align: center;
+  padding: var(--space-7) var(--space-4) 0;
+  border-top: 1px solid var(--hairline);
+}
+.gallery-coda .section__label {
+  margin-bottom: var(--space-4);
+}
+.gallery-coda p:not(.section__label) {
+  font-size: var(--fs-md);
+  font-style: italic;
+  font-family: var(--font-display);
+  color: var(--ink-soft);
+  line-height: 1.7;
+  font-variation-settings: "opsz" 96, "SOFT" 80;
+  margin: 0 auto;
+  max-width: 50ch;
+}
+
 /* Section ornament — small italic flourish between sections */
 .ornament {
   text-align: center;
