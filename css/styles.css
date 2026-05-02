@@ -148,22 +148,27 @@ a:hover { color: var(--accent); border-bottom-color: var(--accent); }
   border-bottom-color: var(--accent);
 }
 
-/* Hero */
+/* Hero — default is a simple single-column intro for sub-pages.
+   The home page uses .hero with .hero__photo-pane inside, which switches to split layout. */
 .hero {
-  min-height: 100svh;
+  padding: clamp(var(--space-6), 7vw, var(--space-8)) 0 clamp(var(--space-5), 5vw, var(--space-7));
+  border-bottom: 1px solid var(--hairline);
+}
+
+/* Split layout for the home page (when a photo pane is present) */
+.hero:has(.hero__photo-pane) {
+  min-height: 88svh;
   display: grid;
   grid-template-columns: 1fr 1fr;
   align-items: stretch;
   padding: 0;
   margin: 0;
-  border-bottom: 1px solid var(--hairline);
 }
 .hero__copy {
   display: flex;
   flex-direction: column;
-  justify-content: flex-end;
-  padding: clamp(var(--space-6), 6vw, var(--space-9));
-  padding-bottom: clamp(var(--space-7), 7vw, var(--space-9));
+  justify-content: center;
+  padding: clamp(var(--space-6), 6vw, var(--space-8));
 }
 .hero__photo-pane {
   position: relative;
@@ -231,7 +236,7 @@ a:hover { color: var(--accent); border-bottom-color: var(--accent); }
 .hero__cta:hover { color: var(--accent); border-color: var(--accent); }
 
 @media (max-width: 767px) {
-  .hero {
+  .hero:has(.hero__photo-pane) {
     grid-template-columns: 1fr;
     grid-template-rows: 60vw 1fr;
     min-height: unset;
